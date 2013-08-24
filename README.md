@@ -1,2 +1,3 @@
-CWS-Belle-PropertyEditors
+CWS - Belle Property Editors Playground
 =========================
+
