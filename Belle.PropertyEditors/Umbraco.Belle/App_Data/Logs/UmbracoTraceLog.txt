@@ -1544,3 +1544,4 @@
 2013-08-24 12:39:48,326 [20] INFO  Umbraco.Core.PluginManager - [Thread 22] Completed resolution of types of umbraco.interfaces.ICacheRefresher, found 22 (took 15ms)
 2013-08-24 12:42:33,217 [20] INFO  Umbraco.Core.PluginManager - [Thread 22] Starting resolution types of umbraco.XsltExtensionAttribute
 2013-08-24 12:42:33,230 [20] INFO  Umbraco.Core.PluginManager - [Thread 22] Completed resolution of types of umbraco.XsltExtensionAttribute, found 0 (took 12ms)
+2013-08-24 20:47:32,993 [20] INFO  Umbraco.Web.Security.WebSecurity - [Thread 41] User Id: 0 logged in

@@ -2,9 +2,11 @@ angular.module("umbraco").controller("CWS.UserPickerController", function ($scop
 
     $log.log("Start User Picker Controller");
 
-    $scope.users = userResource.getAll();
+    $log.log(userResource);
 
+    var users = userResource.getAll();
 
+    $scope.users = users;
 
     //Set the value we save to Umbraco as the selectedUser itme in the scope
     $scope.model.value = $scope.selectedUser;
