@@ -1,0 +1,15 @@
+{
+    propertyEditors: [      
+        {
+            id: "B2FE9CFE-50FC-42A5-9DFE-35DE84953C67",
+            name: "(CWS) RGBA Colour Picker",
+            editor: {
+                view: "~/App_Plugins/RGBAEditor/rgba-editor.html"
+            }
+        }
+    ]
+    ,
+    javascript: [
+        '~/App_Plugins/RGBAEditor/rgba.controller.js'
+    ]
+}

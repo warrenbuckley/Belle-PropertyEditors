@@ -1,0 +1,52 @@
+<div ng-controller="CWS.RGBAController">
+
+    <div class="row">
+        <!-- SLIDERS -->
+        <div class="sliders span8">
+            <!-- RED -->
+            <div class="control-group">
+                 <label class="control-label" for="rgba-red">Red</label>
+                <div class="controls">
+                     <input type="text" name="rgba-red" ng-model="renderModel.red" class="slider red" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="255" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
+                </div>
+            </div>
+
+            <!-- GREEN -->
+            <div class="control-group">
+                 <label class="control-label" for="rgba-green">Green</label>
+                <div class="controls">
+                     <input type="text" name="rgba-green" ng-model="renderModel.green" class="slider green" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="0" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
+                </div>
+            </div>
+
+            <!-- BLUE -->
+            <div class="control-group">
+                 <label class="control-label" for="rgba-blue">Blue</label>
+                <div class="controls">
+                     <input type="text" name="rgba-blue" ng-model="renderModel.blue" class="slider blue" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="0" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
+                </div>
+            </div>
+
+            <!-- ALPHA -->
+            <div class="control-group">
+                 <label class="control-label" for="rgba-alpha">Alpha (%)</label>
+                <div class="controls">
+                     <input type="text" name="rgba-alpha" ng-model="renderModel.alpha" class="slider alpha" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="100" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
+                </div>
+            </div>
+        </div>
+
+        <!-- PREVIEW -->
+        <div class="preview span4">
+            <!-- This will show a live preview of the RGBA colour based on jQuery UI sliders below -->
+            <div id="rgba-preview-{{model.alias }}"><span ng-style="{background: preview}"></span></div>
+            {{ renderModel.red }} {{ renderModel.green }} {{ renderModel.blue }} {{ renderModel.alpha }}
+        </div>
+    </div>
+
+    <hr/>
+
+    <h6>Debug JSON</h6>
+    {{ model | json }}
+
+</div>

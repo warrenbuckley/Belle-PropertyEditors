@@ -1,0 +1,18 @@
+<div ng-controller="CWS.UserPickerController">
+
+    <div class="row">
+        <select name="{{ model.alias }}" ng-model="users">
+            <optgroup>Select User</optgroup>
+            <option ng-repeat="user in users">JOHN</option>
+        </select>
+    </div>
+
+    <hr/>
+
+    <h6>Debug JSON</h6>
+    {{ model | json }}
+    
+    <h6>Users</h6>
+    {{ users | json }}
+
+</div>
