@@ -1,0 +1,12 @@
+<div ng-controller="CWS.SliderController">
+    
+    <input type="text" name="slider" ng-model="model.value" class="slider-item" data-slider-min="{{ model.config.minValue.value }}" data-slider-max="{{ model.config.maxValue.value }}" data-slider-step="{{ model.config.stepValue.value }}" data-slider-value="{{ initValue }}" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show" />
+    
+    <hr/>
+
+    <h6>Debug JSON</h6>
+    {{ model | json }}
+    
+    <h6>Value</h6>
+    {{ model.value }}
+</div>

@@ -1,15 +1,32 @@
 <div ng-controller="Umbraco.Editors.MediaPickerController">
-	<ul class="thumbnails">
-		<li class="span4" ng-repeat="image in value">
-			<a href="#" class="thumbnail" prevent-default>
-				<img ng-src="{{image.thumbnail}}" />
+
+	<div ng-show="currentImage" class="umb-image-crop">
+		<div class="umb-image-mask">
+				<i class="icon-screenshot"></i>
+				<i class="icon-circle"></i>
+			<img src="/media/dummy/crop-large.png" alt="">
+		</div>
+
+		<div class="umb-image-controls clearfix">
+			<i class="icon icon-minus"></i> 
+			<input class="range" type="range" min="0" max="100" step="5" value="35">
+			<i class="icon icon-plus"></i> 
+		</div>
+	</div>
+
+
+	<ul class="thumbnails umb-crop-preview">
+		<li class="umb-thumbnail" ng-repeat="image in images">
+			<a href ng-click="crop(image)">
+				<img ng-src="image.src" alt="">
 			</a>
 		</li>
-		<li class="umb-plus-btn">
+		
+		<li class="umb-thumbnail span4">
 			<a href="#" ng-click="openMediaPicker(value)" prevent-default>
 				<i class="icon icon-plus"></i> 
 			</a>
-		</li>    
-	</ul> 
-	<br/><br/>
+		</li>
+	</ul>
+
 </div>

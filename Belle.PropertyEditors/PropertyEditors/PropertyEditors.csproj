@@ -66,6 +66,12 @@
     <Content Include="App_Plugins\RGBAEditor\lib\transparent-grid.PNG" />
     <Content Include="App_Plugins\RGBAEditor\rgba-editor.html" />
     <Content Include="App_Plugins\RGBAEditor\rgba.controller.js" />
+    <Content Include="App_Plugins\Slider\lib\bootstrap-slider\bootstrap-slider.js" />
+    <Content Include="App_Plugins\Slider\lib\bootstrap-slider\slider.css" />
+    <Content Include="App_Plugins\Slider\lib\CWS-rgba.css" />
+    <Content Include="App_Plugins\Slider\lib\transparent-grid.PNG" />
+    <Content Include="App_Plugins\Slider\slider-editor.html" />
+    <Content Include="App_Plugins\Slider\slider.controller.js" />
     <Content Include="App_Plugins\UserPicker\user-picker.html" />
     <Content Include="App_Plugins\UserPicker\userpicker.controller.js" />
   </ItemGroup>
@@ -74,6 +80,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Plugins\UserPicker\package.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Plugins\Slider\package.manifest" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

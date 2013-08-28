@@ -1,4 +1,4 @@
-/*! umbraco - v0.0.1-TechnicalPReview - 2013-08-23
+/*! umbraco - v0.0.1-TechnicalPReview - 2013-08-28
  * https://github.com/umbraco/umbraco-cms/tree/7.0.0
  * Copyright (c) 2013 Umbraco HQ;
  * Licensed MIT
@@ -764,8 +764,11 @@ angular.module('umbraco.services')
                        };
 
                        scope.select = function(item) {
-                           if (scope.dialogData.selection.indexOf(item) < 0) {
+                          var i = scope.dialogData.selection.indexOf(item);
+                           if (i < 0) {
                                scope.dialogData.selection.push(item);
+                           }else{
+                              scope.dialogData.selection.splice(i, 1);
                            }
                        };
 
@@ -1939,6 +1942,11 @@ angular.module('umbraco.services')
 	function add(item) {	    
 	    angularHelper.safeApply($rootScope, function () {
 	        
+	        //add a colon after the headline if there is a message as well
+	        if (item.messsage) {
+	            item.headline += ":";
+	        }
+
 	        //we need to ID the item, going by index isn't good enough because people can remove at different indexes 
 	        // whenever they want. Plus once we remove one, then the next index will be different. The only way to 
 	        // effectively remove an item is by an Id.
@@ -3316,7 +3324,7 @@ function imageHelper() {
             return imagePath.substr(0, imagePath.lastIndexOf('.')) + "_thumb" + ".jpg";
         },
         detectIfImageByExtension: function(imagePath) {
-            var lowered = imagePath;
+            var lowered = imagePath.toLowerCase();
             var ext = lowered.substr(lowered.lastIndexOf(".") + 1);
             return ("," + Umbraco.Sys.ServerVariables.umbracoSettings.imageFileTypes + ",").indexOf("," + ext + ",") !== -1;
         }
@@ -3335,6 +3343,7 @@ function umbDataFormatter() {
         /** formats the display model used to display the data type to the model used to save the data type */
         formatDataTypePostData: function(displayModel, preValues, action) {
             var saveModel = {
+                parentId: -1,
                 id: displayModel.id,
                 name: displayModel.name,
                 selectedEditor: displayModel.selectedEditor,
@@ -3345,7 +3354,7 @@ function umbDataFormatter() {
             for (var i = 0; i < preValues.length; i++) {
                 saveModel.preValues.push({
                     key: preValues[i].alias,
-                    value: preValues[i].value
+                    value: preValues[i].value.value
                 });
             }
             return saveModel;

@@ -200,6 +200,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Web.config.transform" />
     <Content Include="Web.config" />
+    <Content Include="Css\Scss1.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3163,7 +3164,6 @@
   <ItemGroup>
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Css\" />
     <Folder Include="MacroScripts\" />
     <Folder Include="Masterpages\" />
     <Folder Include="Media\" />

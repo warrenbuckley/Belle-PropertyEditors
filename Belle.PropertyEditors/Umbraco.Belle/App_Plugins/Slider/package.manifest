@@ -1,0 +1,63 @@
+{
+    propertyEditors: [      
+        {
+            id: "C539E0EB-C25C-48F5-8F81-B525379F14BC",
+            name: "(CWS) Slider",
+            editor: {
+                view: "~/App_Plugins/Slider/slider-editor.html"
+            },
+			preValueEditor: {
+				fields: [
+					{
+						label: "Min Value",
+						description: "Set the slider minimum value",
+						key: "minValue",
+						view: "textarea",
+						validation: [
+							{
+								type: "Required" 
+							}						
+						]
+					},
+					{
+						label: "Max Value",
+						description: "Set the slider minimum value",
+						key: "maxValue",
+						view: "textarea",
+						validation: [
+							{
+								type: "Required" 
+							}						
+						]
+					},
+					{
+						label: "Step Value",
+						description: "Set the slider incremental step value",
+						key: "stepValue",
+						view: "textarea",
+						validation: [
+							{
+								type: "Required" 
+							}						
+						]
+					},
+					{
+						label: "Initial Value",
+						description: "Set the slider initial value when loaded for first time",
+						key: "initValue",
+						view: "textarea",
+						validation: [
+							{
+								type: "Required" 
+							}						
+						]
+					}
+				]
+			}
+        }
+    ]
+    ,
+    javascript: [
+        '~/App_Plugins/Slider/slider.controller.js'
+    ]
+}

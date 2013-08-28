@@ -1,0 +1,15 @@
+{
+    propertyEditors: [      
+        {
+            id: "CD022EDE-EDA7-4DB2-9AED-BB3F1BE5F5EB",
+            name: "(CWS) Gradient Colour Picker",
+            editor: {
+                view: "~/App_Plugins/GradientPicker/gradient-editor.html"
+            }
+        }
+    ]
+    ,
+    javascript: [
+        '~/App_Plugins/GradientPicker/gradient.controller.js'
+    ]
+}

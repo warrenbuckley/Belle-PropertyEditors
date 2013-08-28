@@ -1,4 +1,4 @@
-/*! umbraco - v0.0.1-TechnicalPReview - 2013-08-23
+/*! umbraco - v0.0.1-TechnicalPReview - 2013-08-28
  * https://github.com/umbraco/umbraco-cms/tree/7.0.0
  * Copyright (c) 2013 Umbraco HQ;
  * Licensed MIT
@@ -38,7 +38,7 @@ angular.module("umbraco.directives")
 
       setTimeout(function () {
         el.height(window.height() - (el.offset().top + totalOffset));
-      }, 300);
+      }, 500);
 
       window.bind("resize", function () {
         el.height(window.height() - (el.offset().top + totalOffset));
@@ -106,95 +106,44 @@ angular.module('umbraco.directives.editors').directive('ace', function(assetsSer
   };
 });
 
+
 /**
 * @ngdoc directive
-* @name umbraco.directives.directive:headline
+* @name umbraco.directives.directive:hexBgColor
+* @restrict A
+* @description Used to set a hex background color on an element, this will detect valid hex and when it is valid it will set the color, otherwise
+* a color will not be set.
+**/
+function hexBgColor() {
+    return {        
+        restrict: "A",
+        link: function (scope, element, attr, formCtrl) {
 
-angular.module("umbraco.directives")
-  .directive('headline', function ($window) {
-      return function (scope, el, attrs) {
+            var origColor = null;
+            if (attr.hexBgOrig) {
+                //set the orig based on the attribute if there is one
+                origColor = attr.hexBgOrig;
+            }
+            
+            attr.$observe("hexBgColor", function (newVal) {
+                if (newVal) {
+                    if (!origColor) {
+                        //get the orig color before changing it
+                        origColor = element.css("border-color");
+                    }
+                    //validate it
+                    if (/^([0-9a-f]{3}|[0-9a-f]{6})$/i.test(newVal)) {
+                        element.css("background-color", "#" + newVal);
+                        return;
+                    }
+                }
+                element.css("background-color", origColor);
+            });
 
-          var h1 = $("<h1 class='umb-headline-editor'></h1>").hide();
-          el.parent().prepend(h1);
-          el.addClass("umb-headline-editor");
-
-
-
-          if (el.val() !== '') {
-              el.hide();
-              h1.text(el.val());
-              h1.show();
-          } else {
-              el.focus();
-          }
-
-
-          el.on("blur", function () {
-              //Don't hide the input field if there is no value in it
-              if (el.val() !== '') {
-                  el.hide();
-                  h1.html(el.val()).show();
-              }
-          });
-
-          h1.on("click", function () {
-              h1.hide();
-              el.show().focus();
-          });
-      };
-  });
-*/
-
-angular.module('umbraco.directives').directive('headline', function() {
-    return {
-      restrict: 'E',
-      require: '?ngModel',
-      transclude: false,
-      template: '<div class="umb-headline-editor-wrapper"><h1 class="umb-headline-editor">{{ngModel}}</h1><input type="text"></div>',
-
-      link: function(scope, element, attrs, ngModel) {
-        
-        function read() {
-          ngModel.$setViewValue(editor.getValue());
-          textarea.val(editor.getValue());
         }
-
-        var input = $(element).find('input');
-        var h1 = $(element).find('h1');
-        input.hide();
-        
-        if (!ngModel)
-        {
-          return; // do nothing if no ngModel
-        }
-
-        ngModel.$render = function() {
-          var value = ngModel.$viewValue || '';
-          input.val(value);
-          h1.text(value);
-
-          if(value === ''){
-            input.show();
-            h1.hide();
-          }
-        };
-
-
-        input.on("blur", function () {
-            //Don't hide the input field if there is no value in it
-            var val = input.val() || "empty";
-            input.hide();
-            h1.text(val);
-            h1.show();
-        });
-
-        h1.on("click", function () {
-            h1.hide();
-            input.show().focus();
-        });
-      } 
     };
-  });  
+}
+angular.module('umbraco.directives').directive("hexBgColor", hexBgColor);
 /**
 * @ngdoc directive
 * @name umbraco.directives.directive:headline
@@ -1171,12 +1120,20 @@ function valPropertyMsg(serverValidationManager) {
             // the form. Of course normal client-side validators will continue to execute.          
             scope.$watch("property.value", function (newValue) {
                 //we are explicitly checking for valServer errors here, since we shouldn't auto clear
-                // based on other errors.
-                if (formCtrl.$invalid && scope.formCtrl.$error.valServer !== undefined) {
+                // based on other errors. We'll also check if there's no other validation errors apart from valPropertyMsg, if valPropertyMsg
+                // is the only one, then we'll clear.
+
+                var errCount = 0;
+                for (var e in scope.formCtrl.$error) {
+                    errCount++;
+                }
+
+                if ((errCount === 1 && scope.formCtrl.$error.valPropertyMsg !== undefined) ||
+                    (formCtrl.$invalid && scope.formCtrl.$error.valServer !== undefined)) {
                     scope.errorMsg = "";
                     formCtrl.$setValidity('valPropertyMsg', true);
                 }
-            });
+            }, true);
             
             //listen for server validation changes
             // NOTE: we pass in "" in order to listen for all validation changes to the content property, not for

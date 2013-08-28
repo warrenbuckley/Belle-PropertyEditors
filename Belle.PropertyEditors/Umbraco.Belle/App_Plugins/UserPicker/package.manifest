@@ -4,7 +4,8 @@
             id: "8a02c8fe-4d5d-4e6e-9525-e9a529928048",
             name: "(CWS) User Picker",
             editor: {
-                view: "~/App_Plugins/UserPicker/user-picker.html"
+                view: "~/App_Plugins/UserPicker/user-picker.html",
+				valueType: 'int'
             }
         }
     ]

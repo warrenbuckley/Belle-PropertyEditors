@@ -1,4 +1,4 @@
-/*! umbraco - v0.0.1-TechnicalPReview - 2013-08-23
+/*! umbraco - v0.0.1-TechnicalPReview - 2013-08-28
  * https://github.com/umbraco/umbraco-cms/tree/7.0.0
  * Copyright (c) 2013 Umbraco HQ;
  * Licensed MIT
@@ -33,13 +33,13 @@ angular.module('umbraco.mocks').
                           {
                               label: "Custom pre value 1 for editor " + selectedId,
                               description: "Enter a value for this pre-value",
-                              key: "myPreVal",
+                              key: "myPreVal1",
                               view: "requiredfield"                              
                           },
                             {
                                 label: "Custom pre value 2 for editor " + selectedId,
                                 description: "Enter a value for this pre-value",
-                                key: "myPreVal",
+                                key: "myPreVal2",
                                 view: "requiredfield"                                
                             }
                     ]
@@ -67,7 +67,8 @@ angular.module('umbraco.mocks').
                         id: 1, 
                         active: true,
                         properties: [                            
-                            { alias: "list", label: "List", view: "listview", value: "", hideLabel: true }
+                            { alias: "list", label: "List", view: "listview", value: "", hideLabel: true },
+                            { alias: "media", label: "Media picker", view: "mediapicker", value: "" }
                         ]
                     },
                     {
@@ -78,7 +79,7 @@ angular.module('umbraco.mocks').
                             { alias: "bodyText", label: "Body Text", description: "Here you enter the primary article contents", view: "rte", value: "<p>askjdkasj lasjd</p>" },
                             { alias: "textarea", label: "textarea", view: "textarea", value: "ajsdka sdjkds", config: { rows: 4 } },
                             { alias: "map", label: "Map", view: "googlemaps", value: "37.4419,-122.1419", config: { mapType: "ROADMAP", zoom: 4 } },
-                            { alias: "media", label: "Media picker", view: "mediapicker", value: "" },
+                            
                             { alias: "content", label: "Content picker", view: "contentpicker", value: "1234,23242,23232,23231" }
                         ]
                     },
@@ -601,7 +602,7 @@ angular.module('umbraco.mocks').
 
           $(ids).each(function(i, id){
             var _id = parseInt(id, 10);
-            nodes.push(mocksUtils.getMockEntity(_id)); 
+            nodes.push(mocksUtils.getMockEntity(_id));
           });
           
           return [200, nodes, null];
@@ -611,12 +612,20 @@ angular.module('umbraco.mocks').
       return {
           register: function () {
               $httpBackend
-                  .whenGET(mocksUtils.urlRegex('/umbraco/UmbracoApi/Entity/GetByIds'))
+                  .whenGET(mocksUtils.urlRegex('/umbraco/UmbracoApi/Entity/GetEntitiesByIds'))
                   .respond(returnEntitybyIds);
 
               $httpBackend
-                  .whenGET(mocksUtils.urlRegex('/umbraco/UmbracoApi/Entity/GetById?'))
+                  .whenGET(mocksUtils.urlRegex('/umbraco/UmbracoApi/Entity/GetEntityById?'))
                   .respond(returnEntitybyId);
+
+              $httpBackend
+                  .whenGET(mocksUtils.urlRegex('/umbraco/UmbracoApi/Entity/GetDocumentsByIds'))
+                  .respond(returnEntitybyIds);
+
+              $httpBackend
+                  .whenGET(mocksUtils.urlRegex('/umbraco/UmbracoApi/Entity/GetDocumentById?'))
+                  .respond(returnEntitybyId);   
           }
       };
   }]);
