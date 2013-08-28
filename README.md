@@ -5,4 +5,5 @@ Belle Property Editors Playground
 * RGBA
 * Slider with PreValues
 * User Picker (Work in Progress)
+* Stylesheet Picker (Work in Progress)
 * 
